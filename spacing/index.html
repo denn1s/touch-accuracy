@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Target Spacing - Touch Is Fuzzy</title>
+  <link rel="stylesheet" href="spacing.css">
+</head>
+<body>
+  <!-- START SCREEN -->
+  <div id="start-screen" class="screen screen--active">
+    <div class="start-content">
+      <h1 class="start-title">Target Spacing Test</h1>
+      <p class="start-instructions">Tap the target matching the color shown above.</p>
+      <p class="start-note">Wrong target = 500ms penalty. Watch how spacing affects your accuracy.</p>
+      <p class="start-hint">Tap anywhere to begin</p>
+    </div>
+  </div>
+
+  <!-- TEST SCREEN -->
+  <div id="test-screen" class="screen">
+    <div class="progress-indicator">
+      <span id="tap-count">0</span> / 30
+    </div>
+    
+    <div class="prompt-area">
+      <div id="color-prompt" class="color-prompt"></div>
+    </div>
+
+    <div class="config-label">
+      <span id="config-info"></span>
+    </div>
+
+    <div id="targets-container" class="targets-container">
+      <div id="target-0" class="target" data-index="0"></div>
+      <div id="target-1" class="target" data-index="1"></div>
+      <div id="target-2" class="target" data-index="2"></div>
+    </div>
+
+    <div id="flash-overlay" class="flash-overlay"></div>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div id="results-screen" class="screen">
+    <div class="results-container">
+      <h2 class="results-title">Results</h2>
+      
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-label">Total Correct</span>
+          <span id="total-correct" class="stat-value">--</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Total Errors</span>
+          <span id="total-errors" class="stat-value">--</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Overall Accuracy</span>
+          <span id="overall-accuracy" class="stat-value">--</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Total Time</span>
+          <span id="total-time" class="stat-value">--</span>
+        </div>
+      </div>
+
+      <h3 class="section-title">Errors by Configuration</h3>
+      
+      <div class="config-stats" id="config-stats"></div>
+
+      <div class="chart-area">
+        <canvas id="chart-canvas"></canvas>
+      </div>
+
+      <div class="insight-box">
+        <p><strong>Key insight:</strong> Smaller targets with no spacing require more precision, leading to more errors.</p>
+      </div>
+
+      <div class="actions">
+        <button id="restart-btn" class="action-btn">Try Again</button>
+        <a href="../" class="action-btn action-btn--secondary">Back to Tools</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="spacing.js"></script>
+</body>
+</html>
