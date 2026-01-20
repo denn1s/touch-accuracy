@@ -323,27 +323,41 @@ function handleTouch(e) {
   }
 }
 
+// Get tapped target from coordinates
+function getTargetFromPoint(x, y) {
+  for (const target of targets) {
+    const rect = target.getBoundingClientRect()
+    if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+      return target
+    }
+  }
+  return null
+}
+
+// Handle test screen interaction
+function handleTestInteraction(x, y) {
+  if (state !== 'testing') return
+
+  const target = getTargetFromPoint(x, y)
+  if (target) {
+    handleTargetTap(target.dataset.color)
+  }
+}
+
 // Bind events
 startScreen.addEventListener('click', handleClick)
 startScreen.addEventListener('touchstart', handleTouch, { passive: false })
 
-// Target click handlers
-targets.forEach(target => {
-  target.addEventListener('click', (e) => {
-    e.stopPropagation()
-    if (state === 'testing') {
-      handleTargetTap(target.dataset.color)
-    }
-  })
-
-  target.addEventListener('touchstart', (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (state === 'testing') {
-      handleTargetTap(target.dataset.color)
-    }
-  }, { passive: false })
+// Test screen - use event delegation with coordinate-based hit detection
+testScreen.addEventListener('click', (e) => {
+  handleTestInteraction(e.clientX, e.clientY)
 })
+
+testScreen.addEventListener('touchstart', (e) => {
+  e.preventDefault()
+  const touch = e.touches[0]
+  handleTestInteraction(touch.clientX, touch.clientY)
+}, { passive: false })
 
 // Restart button
 document.getElementById('restart-btn').addEventListener('click', () => {
@@ -356,3 +370,4 @@ window.addEventListener('resize', () => {
     drawChart()
   }
 })
+
