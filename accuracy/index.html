@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Touch Accuracy - Touch Is Fuzzy</title>
+  <link rel="stylesheet" href="accuracy.css">
+</head>
+<body>
+  <!-- START SCREEN -->
+  <div id="start-screen" class="screen screen--active">
+    <div class="start-content">
+      <h1 class="start-title">Touch Accuracy Test</h1>
+      <p class="start-instructions">Tap 20 targets as quickly and accurately as you can.</p>
+      <p class="start-hint">Tap anywhere to begin</p>
+    </div>
+  </div>
+
+  <!-- TEST SCREEN -->
+  <div id="test-screen" class="screen">
+    <div class="progress-indicator">
+      <span id="tap-count">0</span> / 20
+    </div>
+    <div id="target" class="target"></div>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div id="results-screen" class="screen">
+    <div class="results-container">
+      <h2 class="results-title">Results</h2>
+      
+      <div class="visualization-area">
+        <canvas id="results-canvas"></canvas>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-label">Avg Error</span>
+          <span id="avg-error" class="stat-value">--</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Max Error</span>
+          <span id="max-error" class="stat-value">--</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Total Time</span>
+          <span id="total-time" class="stat-value">--</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Avg per Tap</span>
+          <span id="avg-time" class="stat-value">--</span>
+        </div>
+        <div class="stat stat--wide">
+          <span class="stat-label">Screen Resolution</span>
+          <span id="screen-resolution" class="stat-value">--</span>
+        </div>
+      </div>
+
+      <div id="quartiles-stats" class="quartiles-stats" style="display: none;"></div>
+
+      <div class="toggles">
+        <button id="toggle-heatmap" class="toggle-btn">Heatmap</button>
+        <button id="toggle-bias" class="toggle-btn">Bias</button>
+        <button id="toggle-quartiles" class="toggle-btn">Quartiles</button>
+      </div>
+
+      <div class="actions">
+        <button id="restart-btn" class="action-btn">Try Again</button>
+        <a href="../" class="action-btn action-btn--secondary">Back to Tools</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="accuracy.js"></script>
+</body>
+</html>
