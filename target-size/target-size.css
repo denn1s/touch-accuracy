@@ -1,0 +1,291 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background: #fff;
+  color: #1a1a1a;
+}
+
+/* Screens */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+  background: #fff;
+}
+
+.screen--active {
+  display: flex;
+}
+
+/* Start Screen */
+#start-screen {
+  align-items: center;
+  justify-content: center;
+}
+
+.start-content {
+  text-align: center;
+  padding: 2rem;
+}
+
+.start-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.start-instructions {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.start-note {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 2rem;
+}
+
+.start-hint {
+  font-size: 0.9rem;
+  color: #999;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Test Screen */
+.progress-indicator {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9rem;
+  color: #999;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.target {
+  position: absolute;
+  border-radius: 50%;
+  background: #333;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: width 0.1s, height 0.1s;
+}
+
+.flash-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s;
+  z-index: 5;
+}
+
+.flash-overlay--miss {
+  background: rgba(239, 68, 68, 0.3);
+  opacity: 1;
+}
+
+.flash-overlay--hit {
+  background: rgba(34, 197, 94, 0.3);
+  opacity: 1;
+}
+
+/* Results Screen */
+#results-screen {
+  overflow-y: auto;
+}
+
+.results-container {
+  padding: 1.5rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.results-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #666;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Size stats */
+.size-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.size-stat {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+}
+
+.size-stat--small {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.size-stat--medium {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.size-stat--large {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.size-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.size-dot {
+  border-radius: 50%;
+  background: #333;
+  flex-shrink: 0;
+}
+
+.size-dot--small {
+  width: 16px;
+  height: 16px;
+}
+
+.size-dot--medium {
+  width: 24px;
+  height: 24px;
+}
+
+.size-dot--large {
+  width: 32px;
+  height: 32px;
+}
+
+.size-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.size-metrics {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.size-metric {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Chart */
+.chart-area {
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  height: 180px;
+}
+
+#chart-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #333;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.action-btn:hover {
+  background: #1a1a1a;
+}
+
+.action-btn--secondary {
+  background: #fff;
+  color: #333;
+}
+
+.action-btn--secondary:hover {
+  background: #f5f5f5;
+}

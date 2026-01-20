@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Target Size - Touch Is Fuzzy</title>
+  <link rel="stylesheet" href="target-size.css">
+</head>
+<body>
+  <!-- START SCREEN -->
+  <div id="start-screen" class="screen screen--active">
+    <div class="start-content">
+      <h1 class="start-title">Target Size Test</h1>
+      <p class="start-instructions">Hit 24 targets of varying sizes as quickly as you can.</p>
+      <p class="start-note">You must hit the target to proceed. Misses are penalized.</p>
+      <p class="start-hint">Tap anywhere to begin</p>
+    </div>
+  </div>
+
+  <!-- TEST SCREEN -->
+  <div id="test-screen" class="screen">
+    <div class="progress-indicator">
+      <span id="tap-count">0</span> / 24
+    </div>
+    <div id="target" class="target"></div>
+    <div id="flash-overlay" class="flash-overlay"></div>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div id="results-screen" class="screen">
+    <div class="results-container">
+      <h2 class="results-title">Results</h2>
+      
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-label">Total Hits</span>
+          <span id="total-hits" class="stat-value">--</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Total Misses</span>
+          <span id="total-misses" class="stat-value">--</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Overall Accuracy</span>
+          <span id="overall-accuracy" class="stat-value">--</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Total Time</span>
+          <span id="total-time" class="stat-value">--</span>
+        </div>
+      </div>
+
+      <h3 class="section-title">Performance by Size</h3>
+      
+      <div class="size-stats">
+        <div class="size-stat size-stat--small">
+          <div class="size-header">
+            <span class="size-dot size-dot--small"></span>
+            <span class="size-label">Small (32px)</span>
+          </div>
+          <div class="size-metrics">
+            <span id="small-misses" class="size-metric">-- misses</span>
+            <span id="small-accuracy" class="size-metric">--% accuracy</span>
+            <span id="small-time" class="size-metric">-- avg time</span>
+          </div>
+        </div>
+        
+        <div class="size-stat size-stat--medium">
+          <div class="size-header">
+            <span class="size-dot size-dot--medium"></span>
+            <span class="size-label">Medium (56px)</span>
+          </div>
+          <div class="size-metrics">
+            <span id="medium-misses" class="size-metric">-- misses</span>
+            <span id="medium-accuracy" class="size-metric">--% accuracy</span>
+            <span id="medium-time" class="size-metric">-- avg time</span>
+          </div>
+        </div>
+        
+        <div class="size-stat size-stat--large">
+          <div class="size-header">
+            <span class="size-dot size-dot--large"></span>
+            <span class="size-label">Large (80px)</span>
+          </div>
+          <div class="size-metrics">
+            <span id="large-misses" class="size-metric">-- misses</span>
+            <span id="large-accuracy" class="size-metric">--% accuracy</span>
+            <span id="large-time" class="size-metric">-- avg time</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-area">
+        <canvas id="chart-canvas"></canvas>
+      </div>
+
+      <div class="actions">
+        <button id="restart-btn" class="action-btn">Try Again</button>
+        <a href="../" class="action-btn action-btn--secondary">Back to Tools</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="target-size.js"></script>
+</body>
+</html>
