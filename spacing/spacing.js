@@ -25,6 +25,7 @@ let currentTrialInConfig = 0
 let currentTargetColor = null
 let startTime = null
 let isLocked = false
+let lastProcessedTrial = -1 // Track to prevent double-processing
 
 // Per-config tracking
 let configData = {}
@@ -120,6 +121,7 @@ function startTest() {
   startTime = Date.now()
   state = 'testing'
   isLocked = false
+  lastProcessedTrial = -1
   tapCount.textContent = '0'
   showScreen('test-screen')
   setupTargets()
@@ -132,18 +134,27 @@ function getCurrentTrialNumber() {
 
 // Handle target tap
 function handleTargetTap(tappedColor) {
+  // Prevent processing if locked (wrong answer penalty)
   if (isLocked) return
+
+  // Get current trial BEFORE any state changes
+  const trialNum = getCurrentTrialNumber()
+
+  // Prevent double-processing the same trial (for rapid taps)
+  if (trialNum === lastProcessedTrial) return
 
   const config = CONFIGS[currentConfigIndex]
 
   if (tappedColor === currentTargetColor) {
+    // Mark trial as processed IMMEDIATELY
+    lastProcessedTrial = trialNum
+
     // Correct!
-    isLocked = true // Lock briefly to prevent double-taps during DOM update
     flash('hit')
     configData[config.label].hits++
 
     // Update progress
-    tapCount.textContent = getCurrentTrialNumber()
+    tapCount.textContent = trialNum
 
     // Advance
     currentTrialInConfig++
@@ -161,11 +172,6 @@ function handleTargetTap(tappedColor) {
     }
 
     setupTargets()
-
-    // Unlock after a brief delay to allow DOM to update
-    setTimeout(() => {
-      isLocked = false
-    }, 50)
   } else {
     // Wrong target!
     flash('miss', MISS_PENALTY_MS)
