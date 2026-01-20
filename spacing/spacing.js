@@ -138,6 +138,7 @@ function handleTargetTap(tappedColor) {
 
   if (tappedColor === currentTargetColor) {
     // Correct!
+    isLocked = true // Lock briefly to prevent double-taps during DOM update
     flash('hit')
     configData[config.label].hits++
 
@@ -160,6 +161,11 @@ function handleTargetTap(tappedColor) {
     }
 
     setupTargets()
+
+    // Unlock after a brief delay to allow DOM to update
+    setTimeout(() => {
+      isLocked = false
+    }, 50)
   } else {
     // Wrong target!
     flash('miss', MISS_PENALTY_MS)

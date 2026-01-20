@@ -283,6 +283,7 @@ body {
 .actions {
   display: flex;
   gap: 0.75rem;
+  margin-bottom: 2rem;
 }
 
 .action-btn {
